@@ -198,8 +198,10 @@ def check_for_suffix(actual_string:str,root:SuffixNode,pattern:str,find_all:bool
     else:
         return -1
 
+def correct_indices(ele):
+    return str(ele-1)
 
-def main(input_string,pattern):
+def main(input_string=None,pattern=None,test=False):
     input_string+="$"
     start = time.time_ns()
     tree = SuffixTree(input_string)
@@ -211,9 +213,13 @@ def main(input_string,pattern):
     text_ = ""
     if check == -1:
         text_ = "Pattern: \""+pattern+"\"\n\nInput:     \""+input_string[:-1]+"\"\n\nResult:   No match"
+        text_+="\n\nDuration: "+str(duration_in_ms)+" ms\n"
     else:
         text_ = "Pattern: \""+pattern+"\"\n\nInput:     \""+input_string[:-1]+"\"\n\nIndices: [ "
-        text_+= ' , '.join(map(str, check)) 
+        if len(check) == 1:
+            text_+= ' , '.join(map(str, check))
+        else:
+            text_+= ' , '.join(map(correct_indices, check))
         text_+=" ]\n\n"
         text_+="Duration: "+str(duration_in_ms)+" ms\n"
     return {
