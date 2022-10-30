@@ -216,10 +216,7 @@ def main(input_string=None,pattern=None,test=False):
         text_+="\n\nDuration: "+str(duration_in_ms)+" ms\n"
     else:
         text_ = "Pattern: \""+pattern+"\"\n\nInput:     \""+input_string[:-1]+"\"\n\nIndices: [ "
-        if len(check) == 1:
-            text_+= ' , '.join(map(str, check))
-        else:
-            text_+= ' , '.join(map(correct_indices, check))
+        text_+= ' , '.join(map(str, check))
         text_+=" ]\n\n"
         text_+="Duration: "+str(duration_in_ms)+" ms\n"
     return {
