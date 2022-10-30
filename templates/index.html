@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+      integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js"
+      integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/fontawesome.min.css"
+      crossorigin="anonymous"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
+      rel="stylesheet"
+    />
+    <title>CSCI 650 Project</title>
+    <style>
+      * {
+        font-family: "Montserrat", sans-serif;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        height: 100%;
+        max-width: 100vw;
+        overflow-x: hidden;
+      }
+      .form-group {
+        margin-bottom: 1rem;
+      }
+      label {
+        margin-bottom: 4px;
+      }
+      @media screen and (max-width: 1000px) {
+        .row {
+          gap: 32px;
+        }
+      }
+      .app-container {
+        margin-top: 120px;
+      }
+      .project-header > h5 {
+        flex: 2 0 auto;
+      }
+      .project-header {
+        z-index: 100;
+      }
+    </style>
+  </head>
+
+  <body class="bg-dark">
+    <div
+      class="card-header align-items-center w-100 justify-space-between d-flex p-4 bg-primary mb-4 position-fixed w-100 project-header"
+    >
+      <h5 class="text-white mb-0">Ukkonen's Algorithm Playground</h5>
+      <a href="/static/report.pdf" class="btn btn-light" download="'Project_Report.pdf'">Download Report</a>
+    </div>
+    <div
+      class="d-flex align-items-center justify-content-start app-container py-2"
+    >
+      <div class="row w-100">
+        <div class="col-12 col-lg-6 col-xl-6">
+          <div class="container-fluid">
+            <div class="card">
+              <div class="card-header bg-primary text-center text-white">
+                Test Ukkonen's Algorithm
+              </div>
+              <div class="card-body">
+                <form action="" method="post">
+                  <div class="form-group">
+                    <label for="input_string">Input String</label>
+                    <textarea
+                      class="form-control"
+                      id="input_string"
+                      placeholder="Enter input string"
+                      rows="6"
+                      name="input_string"
+                    >
+{% if form %}{{ form.get('input_string') }}{% else %}{% endif %}</textarea
+                    >
+                  </div>
+                  <div class="form-group">
+                    <label for="pattern">Pattern</label>
+                    <textarea
+                      class="form-control"
+                      id="pattern"
+                      placeholder="Enter pattern string"
+                      name="pattern"
+                      rows="5"
+                    >{% if form %}{{ form.get('pattern') }}{% else %}{% endif %}</textarea
+                    >
+                  </div>
+                  <div>
+                    <button type="reset" class="btn btn-warning">Reset</button>
+                    <button
+                      type="submit"
+                      class="btn btn-primary align-self-center"
+                    >
+                      Submit
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-lg-6 col-xl-6">
+          <div class="container-fluid">
+            <div class="card" style="min-height: 610px">
+              <div class="card-header bg-primary text-center text-white">
+                Ukkonen Algorithm Results
+              </div>
+              <div
+                {% if results['test_run'] %}
+                class="card-body"
+                {% else %}
+                class="card-body d-flex justify-content-center align-self-center"
+                {% endif %}
+              >
+                {% if results['test_run'] %}
+                <h5 class="card-title">The result is summarized as follows</h5>
+                <div class="card-text">
+                  <textarea disabled class="form-control" rows="13">{{results['value']}}</textarea>
+                </div>
+                <a href="/ukkonen" class="btn btn-primary mt-2">Play with another string?</a>
+                {% else %}
+                <h5 class="card-title align-self-center">
+                  Please enter your input string and pattern.
+                </h5>
+
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
